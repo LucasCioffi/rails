@@ -82,7 +82,8 @@ module ActionController
         @key = options.delete(:key).freeze
 
         # The secret option is required.
-        puts "yolo!"
+        puts "yolo2!"
+        puts "ENV['secret']: #{ENV['secret']}"
         puts options
         ensure_secret_secure(ENV['secret'])
         @secret = ENV['secret'] #options.delete(:secret).freeze

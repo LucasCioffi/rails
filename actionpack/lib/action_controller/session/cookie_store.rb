@@ -83,8 +83,8 @@ module ActionController
 
         # The secret option is required.
         puts "yolo3!"
-        ensure_secret_secure("replace_with_actual_secret")
-        @secret = "replace_with_actual_secret" #options.delete(:secret).freeze
+        ensure_secret_secure("replace_with_actual_secretreplace_with_actual_secret")
+        @secret = "replace_with_actual_secretreplace_with_actual_secret" #options.delete(:secret).freeze
         puts "@secret: #{@secret}"
 
         @digest = options.delete(:digest) || 'SHA1'

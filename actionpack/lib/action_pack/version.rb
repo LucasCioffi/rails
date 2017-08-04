@@ -2,7 +2,7 @@ module ActionPack #:nodoc:
   module VERSION #:nodoc:
     MAJOR = 2
     MINOR = 3
-    TINY  = 18
+    TINY  = 20
 
     STRING = [MAJOR, MINOR, TINY].join('.')
   end

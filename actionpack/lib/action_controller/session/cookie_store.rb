@@ -84,7 +84,7 @@ module ActionController
         # The secret option is required.
         puts "yolo!"
         puts options
-        ensure_secret_secure(options[:secret])
+        ensure_secret_secure(ENV['secret'])
         @secret = options.delete(:secret).freeze
 
         @digest = options.delete(:digest) || 'SHA1'

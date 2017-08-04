@@ -85,7 +85,8 @@ module ActionController
         puts "yolo!"
         puts options
         ensure_secret_secure(ENV['secret'])
-        @secret = options.delete(:secret).freeze
+        @secret = ENV['secret'] #options.delete(:secret).freeze
+        puts "@secret: #{@secret}"
 
         @digest = options.delete(:digest) || 'SHA1'
         @verifier = verifier_for(@secret, @digest)

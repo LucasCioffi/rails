@@ -37,7 +37,7 @@ module ActionController
     # Note that changing digest or secret invalidates all existing sessions!
     class CookieStore
       include AbstractStore::SessionUtils
-      
+
       # Cookies can typically store 4096 bytes.
       MAX = 4096
       SECRET_MIN_LENGTH = 30 # characters
@@ -82,6 +82,8 @@ module ActionController
         @key = options.delete(:key).freeze
 
         # The secret option is required.
+        puts "yolo!"
+        puts options
         ensure_secret_secure(options[:secret])
         @secret = options.delete(:secret).freeze
 
@@ -95,13 +97,13 @@ module ActionController
 
       def call(env)
         prepare!(env)
-        
+
         status, headers, body = @app.call(env)
 
         session_data = env[ENV_SESSION_KEY]
         options = env[ENV_SESSION_OPTIONS_KEY]
         request = ActionController::Request.new(env)
-        
+
         if !(options[:secure] && !request.ssl?) && (!session_data.is_a?(AbstractStore::SessionHash) || session_data.loaded? || options[:expire_after])
           session_data.send(:load!) if session_data.is_a?(AbstractStore::SessionHash) && !session_data.loaded?
 
@@ -122,7 +124,7 @@ module ActionController
       end
 
       private
-      
+
         def prepare!(env)
           env[ENV_SESSION_KEY] = AbstractStore::SessionHash.new(self, env)
           env[ENV_SESSION_OPTIONS_KEY] = AbstractStore::OptionsHash.new(self, env, @default_options)
@@ -133,7 +135,7 @@ module ActionController
           data = persistent_session_id!(data)
           [data[:session_id], data]
         end
-        
+
         def extract_session_id(env)
           if data = unpacked_cookie_data(env)
             persistent_session_id!(data) unless data.empty?
